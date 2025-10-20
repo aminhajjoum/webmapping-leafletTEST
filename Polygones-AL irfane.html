@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Dessiner et afficher des polygones - Madinat Al Irfane</title>
+
+	<!-- Leaflet CSS et JS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+	<!-- Leaflet Draw CSS et JS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+	<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		#map {
+			height: 100vh;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+	// 🗺️ Initialiser la carte
+	const map = L.map('map').setView([33.9767, -6.8669], 19);
+
+	// --- Fond OpenStreetMap ---
+	const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; OpenStreetMap contributors'
+	});
+
+	// --- Fond Google Satellite ---
+	const googleSat = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+		maxZoom: 20,
+		subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+		attribution: '&copy; Google Maps'
+	});
+
+	// Par défaut, on affiche Google Satellite
+	googleSat.addTo(map);
+
+	// --- Contrôle de couches ---
+	const baseMaps = {
+		"Google Satellite": googleSat,
+		"OpenStreetMap": osm
+	};
+	L.control.layers(baseMaps).addTo(map);
+
+	// --- Groupe pour les polygones dessinés ---
+	const drawnItems = new L.FeatureGroup();
+	map.addLayer(drawnItems);
+
+	// --- Outils de dessin ---
+	const drawControl = new L.Control.Draw({
+		edit: { featureGroup: drawnItems },
+		draw: {
+			polygon: {
+				allowIntersection: false,
+				showArea: true,
+				shapeOptions: { color: 'blue' }
+			},
+			polyline: false,
+			circle: false,
+			marker: false,
+			rectangle: false,
+			circlemarker: false
+		}
+	});
+	map.addControl(drawControl);
+
+	// === 🔴 Polygone principal ===
+	const poly1 = [
+		[33.97679397875895, -6.86682352169535],
+		[33.976676657874926, -6.866629808651174],
+		[33.97659724056922, -6.8666900265637825],
+		[33.97654837044448, -6.86662182796396],
+		[33.97644139189891, -6.866704329717343],
+		[33.976404135392904, -6.86667281376234],
+		[33.97628736116371, -6.866782784328734],
+		[33.97635353324702, -6.8669001309752575],
+		[33.97633462694288, -6.866961151228562],
+		[33.97615946539573, -6.867110684376768],
+		[33.97630626748218, -6.867321908337133],
+		[33.97647480862954, -6.867163065102575],
+		[33.97646424335751, -6.867140936878849],
+		[33.97649649523642, -6.867106738714909],
+		[33.97648982243941, -6.867077234407995],
+		[33.97653208350689, -6.8670396834828855],
+		[33.97655988682931, -6.867030966303842],
+		[33.97660659639005, -6.867083939932532],
+		[33.976654418057066, -6.867167758961796],
+		[33.97672448231132, -6.867105397604024],
+		[33.97669779117403, -6.867056447290934],
+		[33.976774528172285, -6.866977322127308],
+		[33.97671836559341, -6.866890820889108]
+	];
+	const polygon1 = L.polygon(poly1, { color: 'red', fillColor: '#ff6666', fillOpacity: 0.6 }).addTo(map);
+
+	// === 🟢 Polygone 2 ===
+	const poly2 = [
+		[33.975204203633915, -6.865946063716372],
+		[33.97502244340073, -6.8656569068550315],
+		[33.974794695090196, -6.865873444413296],
+		[33.974998354665956, -6.866134873904372]
+	];
+	const polygon2 = L.polygon(poly2, { color: 'green', fillColor: '#66ff66', fillOpacity: 0.6 }).addTo(map);
+
+	// === 🔵 Polygone 3 ===
+	const poly3 = [
+		[33.97610536263391, -6.8667041166518885],
+		[33.97600005669917, -6.866535519262439],
+		[33.97591854862626, -6.866610850010916],
+		[33.97602563950887, -6.866783752014563]
+	];
+	const polygon3 = L.polygon(poly3, { color: 'blue', fillColor: '#6666ff', fillOpacity: 0.6 }).addTo(map);
+
+	// === 🟣 Nouveau polygone 4 ===
+	const poly4 = [
+		[33.97591840615211, -6.8668900897172325],
+		[33.975799139222296, -6.86671250785883],
+		[33.97571010886983, -6.86679893553136],
+		[33.975818737086094, -6.866974491741187]
+	];
+	const polygon4 = L.polygon(poly4, { color: 'purple', fillColor: '#cc66ff', fillOpacity: 0.6 }).addTo(map);
+
+	// === 🟠 Nouveau polygone 5 ===
+	const poly5 = [
+		[33.9756700093033, -6.86711334159731],
+		[33.97555502929431, -6.8669405837408855],
+		[33.9754627992282, -6.867028074844139],
+		[33.97557839422853, -6.867202315600619]
+	];
+	const polygon5 = L.polygon(poly5, { color: 'orange', fillColor: '#ffb366', fillOpacity: 0.6 }).addTo(map);
+
+	// === 🟤 Nouveau polygone 6 ===
+	const poly6 = [
+		[33.975428874328614, -6.866990798038492],
+		[33.97531668573446, -6.866818442132075],
+		[33.97522159694376, -6.866908296131446],
+		[33.975334480116224, -6.867081298607847]
+	];
+	const polygon6 = L.polygon(poly6, { color: 'brown', fillColor: '#cc9966', fillOpacity: 0.6 }).addTo(map);
+
+	// === ⚫ Nouveau polygone 7 ===
+	const poly7 = [
+		[33.975625305776596, -6.866808995552806],
+		[33.97561974505173, -6.866800278373762],
+		[33.97564476831082, -6.8667747973888655],
+		[33.97551297906347, -6.866573631718632],
+		[33.97537118027803, -6.866707742165455],
+		[33.97550853047769, -6.8669176250147315]
+	];
+	const polygon7 = L.polygon(poly7, { color: 'black', fillColor: '#999999', fillOpacity: 0.6 }).addTo(map);
+
+	// --- Ajouter un popup pour tous les polygones ---
+	const allPolygons = [polygon1, polygon2, polygon3, polygon4, polygon5, polygon6, polygon7];
+	allPolygons.forEach(poly => {
+		poly.bindPopup("<b>Bienvenue à vos classes !</b>");
+	});
+
+	// --- Centrer la carte sur tous les polygones ---
+	const group = L.featureGroup(allPolygons);
+	map.fitBounds(group.getBounds());
+
+	// --- Événement : quand on dessine un nouveau polygone ---
+	map.on(L.Draw.Event.CREATED, function (e) {
+		const layer = e.layer;
+		drawnItems.addLayer(layer);
+		if (e.layerType === 'polygon') {
+			layer.bindPopup("<b>Nouveau polygone dessiné !</b><br>Bienvenue à vos classes !").openPopup();
+		}
+	});
+</script>
+
+</body>
+</html>
