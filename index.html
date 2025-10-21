@@ -30,7 +30,7 @@
 <div id="map"></div>
 
 <script>
-	// 🗺️ Initialiser la carte
+	//  Initialiser la carte
 	const map = L.map('map').setView([33.9767, -6.8669], 19);
 
 	// --- Fond OpenStreetMap ---
@@ -78,7 +78,7 @@
 	});
 	map.addControl(drawControl);
 
-	// === 🔴 Polygone principal ===
+	// === Polygone principal ===
 	const poly1 = [
 		[33.97679397875895, -6.86682352169535],
 		[33.976676657874926, -6.866629808651174],
@@ -106,7 +106,7 @@
 	];
 	const polygon1 = L.polygon(poly1, { color: 'red', fillColor: '#ff6666', fillOpacity: 0.6 }).addTo(map);
 
-	// === 🟢 Polygone 2 ===
+	
 	const poly2 = [
 		[33.975204203633915, -6.865946063716372],
 		[33.97502244340073, -6.8656569068550315],
@@ -115,7 +115,7 @@
 	];
 	const polygon2 = L.polygon(poly2, { color: 'green', fillColor: '#66ff66', fillOpacity: 0.6 }).addTo(map);
 
-	// === 🔵 Polygone 3 ===
+	
 	const poly3 = [
 		[33.97610536263391, -6.8667041166518885],
 		[33.97600005669917, -6.866535519262439],
@@ -124,7 +124,7 @@
 	];
 	const polygon3 = L.polygon(poly3, { color: 'blue', fillColor: '#6666ff', fillOpacity: 0.6 }).addTo(map);
 
-	// === 🟣 Nouveau polygone 4 ===
+	
 	const poly4 = [
 		[33.97591840615211, -6.8668900897172325],
 		[33.975799139222296, -6.86671250785883],
@@ -133,7 +133,7 @@
 	];
 	const polygon4 = L.polygon(poly4, { color: 'purple', fillColor: '#cc66ff', fillOpacity: 0.6 }).addTo(map);
 
-	// === 🟠 Nouveau polygone 5 ===
+
 	const poly5 = [
 		[33.9756700093033, -6.86711334159731],
 		[33.97555502929431, -6.8669405837408855],
@@ -142,7 +142,7 @@
 	];
 	const polygon5 = L.polygon(poly5, { color: 'orange', fillColor: '#ffb366', fillOpacity: 0.6 }).addTo(map);
 
-	// === 🟤 Nouveau polygone 6 ===
+	
 	const poly6 = [
 		[33.975428874328614, -6.866990798038492],
 		[33.97531668573446, -6.866818442132075],
@@ -151,7 +151,7 @@
 	];
 	const polygon6 = L.polygon(poly6, { color: 'brown', fillColor: '#cc9966', fillOpacity: 0.6 }).addTo(map);
 
-	// === ⚫ Nouveau polygone 7 ===
+	
 	const poly7 = [
 		[33.975625305776596, -6.866808995552806],
 		[33.97561974505173, -6.866800278373762],
@@ -162,17 +162,17 @@
 	];
 	const polygon7 = L.polygon(poly7, { color: 'black', fillColor: '#999999', fillOpacity: 0.6 }).addTo(map);
 
-	// --- Ajouter un popup pour tous les polygones ---
+	
 	const allPolygons = [polygon1, polygon2, polygon3, polygon4, polygon5, polygon6, polygon7];
 	allPolygons.forEach(poly => {
 		poly.bindPopup("<b>Bienvenue à vos classes !</b>");
 	});
 
-	// --- Centrer la carte sur tous les polygones ---
+	
 	const group = L.featureGroup(allPolygons);
 	map.fitBounds(group.getBounds());
 
-	// --- Événement : quand on dessine un nouveau polygone ---
+	
 	map.on(L.Draw.Event.CREATED, function (e) {
 		const layer = e.layer;
 		drawnItems.addLayer(layer);
@@ -184,3 +184,4 @@
 
 </body>
 </html>
+
